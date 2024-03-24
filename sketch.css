@@ -1,0 +1,22 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+#grid {
+    display: grid;
+    grid-template-columns: repeat(16, 50px); /* Adjust width as needed */
+    grid-template-rows: repeat(16, 50px); /* Adjust height as needed */
+    gap: 1px; /* Adjust gap between squares */
+    border: 1px solid #ccc; /* Border color */
+}
+
+.square {
+    background-color: #fff; /* Square color */
+    border: 1px solid #ccc; /* Border color */
+}
