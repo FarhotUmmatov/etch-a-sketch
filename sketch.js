@@ -1,5 +1,11 @@
 
 document.addEventListener("DOMContentLoaded", function() {
+    /* button = document.createElement('button');
+    button.classList.add('btn');
+    button.textContent = "press here to change the padsize";
+    this.body.appendChild(button);
+ */
+    
     containerDiv = document.querySelector('#container');
     
     for (let i = 0; i < 255; i++) {
@@ -24,6 +30,20 @@ document.addEventListener("DOMContentLoaded", function() {
             square.style.backgroundColor = randomColor;
             });
     });
+
+    button = document.querySelector('.btn');
+    button.addEventListener('click', function () {
+        containerDiv.innerHTML = "";
+        let padsize = prompt("enter the number between 1 to 100", 16);
+        for (let i = 0; i < padsize; i++) {
+            squareDivs = document.createElement('div');
+            squareDivs.classList.add('square');
+            squareDivs.classList.add('cell');
+            containerDiv.appendChild(squareDivs);
+        }
+
+    })
+
   });
 
   
