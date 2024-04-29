@@ -1,49 +1,83 @@
 
 document.addEventListener("DOMContentLoaded", function() {
-    /* button = document.createElement('button');
+    button = document.createElement('button');
     button.classList.add('btn');
     button.textContent = "press here to change the padsize";
-    this.body.appendChild(button);
- */
-    
+    document.body.appendChild(button);
+    document.body.prepend(button);
+
+    title = document.createElement('h1');
+    title.textContent = "Project: Etch-a-Sketch Game";
+    document.body.appendChild(title);
+    document.body.prepend(title);
+
     containerDiv = document.querySelector('#container');
-    
-    for (let i = 0; i < 255; i++) {
-        squareDivs = document.createElement('div');
-        squareDivs.classList.add('square');
-        squareDivs.classList.add('cell');
-        containerDiv.appendChild(squareDivs);
+    let defaultGrid = 16;
+
+    function createInitialGrid() {
+        // Schleife zum Erstellen der Spalten
+        for (let i = 0; i < defaultGrid; i++) {
+            columnDivs = document.createElement('div');
+            columnDivs.classList.add('column');
+            containerDiv.appendChild(columnDivs);
+            // Schleife zum Erstellen der Zellen
+            for (let j = 0; j < defaultGrid; j++) {
+                const cell = document.createElement("div");
+                cell.classList.add("cell");
+                cell.classList.add("hover");
+                columnDivs.appendChild(cell);
+            }
+        } 
+        addHover();       
     }
-    let squares = document.querySelectorAll('.square'); // Alle Quadrat-Divs auswählen
-        
-    squares.forEach(function(square) {
+    createInitialGrid();
+
+    function randomBgColor() {
+        // Zufällige RGB-Werte generieren
+        let r = Math.floor(Math.random() * 256);
+        let g = Math.floor(Math.random() * 256);
+        let b = Math.floor(Math.random() * 256);  
+        // Neue Hintergrundfarbe festlegen
+        let bgColor = 'rgb(' + r + ',' + g + ',' + b + ')';
+        return bgColor;
+    }
+
+    function addHover() {
+        let hover = document.querySelectorAll('.hover');  
+    hover.forEach((element) =>{
             // Event-Listener hinzufügen, um die Hintergrundfarbe zu ändern, 
             // wenn das Quadrat-Div gehovert wird
-        square.addEventListener('mouseover', function() {
-            // Zufällige RGB-Werte generieren
-            let red = Math.floor(Math.random() * 256);
-            let green = Math.floor(Math.random() * 256);
-            let blue = Math.floor(Math.random() * 256);
-                
-            // Neue Hintergrundfarbe festlegen
-            let randomColor = 'rgb(' + red + ',' + green + ',' + blue + ')';
-            square.style.backgroundColor = randomColor;
-            });
-    });
+        element.addEventListener('mouseover', (event) => {
+            element.style.backgroundColor = randomBgColor();
+        });
+    });        
+    }
 
-    button = document.querySelector('.btn');
-    button.addEventListener('click', function () {
-        containerDiv.innerHTML = "";
-        let padsize = prompt("enter the number between 1 to 100", 16);
-        for (let i = 0; i < padsize; i++) {
-            squareDivs = document.createElement('div');
-            squareDivs.classList.add('square');
-            squareDivs.classList.add('cell');
-            containerDiv.appendChild(squareDivs);
+    function newPadsize() {
+        let newPad = prompt("enter the number between 1 to 100", 32);
+        if (1 > newPad || newPad > 100) {
+            return newPadsize();
+        } else {
+            return newPad;
         }
-
+    }
+    
+    button = document.querySelector('.btn');
+    button.addEventListener('click', () => {
+        let padsize = newPadsize();
+        containerDiv.innerHTML = "";
+        for (let i = 0; i < padsize; i++) {
+            columnDivs = document.createElement('div');
+            columnDivs.classList.add('column');
+            containerDiv.appendChild(columnDivs);
+            for (let j = 0; j < padsize; j++) {
+                const cell = document.createElement("div");
+                cell.classList.add("cell", "hover");
+                columnDivs.appendChild(cell); 
+            }
+        }
+        addHover();
     })
-
-  });
+});
 
   

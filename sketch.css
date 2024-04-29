@@ -9,22 +9,41 @@ body {
     height: 100vh;
     background-color: #f0f0f0;
 }
-
 #container {
     display: flex;
-    flex-wrap: wrap;
     height: 600px;
     width: 600px;
-    border: 1px solid #ccc; /* Border color */
 }
-
-.square {
-    width: calc(100% / 16); /* Berechnet die Breite basierend auf 16 Quadraten pro Zeile */
-    height: calc(100% / 16); /* Quadratische Form */
-    transition: background-color 0.3s ease;
+button {
+    color: black;
+    background-color: #f0f0f0;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    padding: 8px;
+    border-radius: 7px;
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+button:hover {
+    color: #2b2a2a;
+    background-color: #fff;
+    cursor: pointer;
+    box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.6);
+    transform: translateZ(5px);
+}
+.column {
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
-    background-color: #fff; /* Square color */
-    border: 1px solid #686868; /* Border color */
+    flex-basis: 5px;
+    flex-grow: 1;
+    background-color: #fff; 
+    
+}
+.cell {
+    transition: background-color 0.4s ease;
+    display: flex;
+    flex-basis:5px;
+    flex-grow: 1;
+    background-color: #fff; 
+    border: 1px solid #f0f0f0; 
 }
